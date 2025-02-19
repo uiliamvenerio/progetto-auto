@@ -1,14 +1,15 @@
 import React from 'react';
 import { Dialog } from '@headlessui/react';
 import clsx from 'clsx';
-import { House, UsersThree, ChatDots, Megaphone, ChartPie, Car } from '../Icons';
+import { House, UsersThree, Megaphone, ChartPie, Car, Wrench, ClipboardText } from '../Icons';
 
 export function MobileMenu({ isOpen, onClose, currentPage, onNavigate }) {
   const menuItems = [
     { id: 'dashboard', label: 'Home', icon: House },
     { id: 'plate-consultation', label: 'Consultar Placa', icon: Car },
+    { id: 'consultation-history', label: 'Histórico de Consultas', icon: ClipboardText },
+    { id: 'maintenance', label: 'Manutenções', icon: Wrench },
     { id: 'customers', label: 'Customers', icon: UsersThree },
-    { id: 'conversations', label: 'Conversations', icon: ChatDots },
     { id: 'campaigns', label: 'Campaigns', icon: Megaphone },
     { id: 'reporting', label: 'Reporting', icon: ChartPie },
   ];

@@ -1,13 +1,13 @@
 import React from 'react';
-import { House, UsersThree, ChatDots, Megaphone, ChartPie, Car, Wrench } from './Icons';
+import { House, UsersThree, Megaphone, ChartPie, Car, Wrench, ClipboardText } from './Icons';
 import clsx from 'clsx';
 
 const menuItems = [
   { id: 'dashboard', icon: House, text: 'Home' },
   { id: 'plate-consultation', icon: Car, text: 'Consultar Placa' },
+  { id: 'consultation-history', icon: ClipboardText, text: 'Histórico de Consultas' },
   { id: 'maintenance', icon: Wrench, text: 'Manutenções' },
   { id: 'customers', icon: UsersThree, text: 'Customers' },
-  { id: 'conversations', icon: ChatDots, text: 'Conversations' },
   { id: 'campaigns', icon: Megaphone, text: 'Campaigns' },
   { id: 'reporting', icon: ChartPie, text: 'Reporting' }
 ];

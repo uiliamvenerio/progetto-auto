@@ -4,13 +4,13 @@ import { Header } from './components/ui/Header';
 import Sidebar from './components/Sidebar';
 import Dashboard from './components/Dashboard';
 import { CustomersPage } from './components/customers/CustomersPage';
-import { ConversationsPage } from './components/conversations/ConversationsPage';
 import { CampaignsPage } from './components/campaigns/CampaignsPage';
 import { ReportingPage } from './components/reporting/ReportingPage';
 import { ProfilePage } from './components/profile/ProfilePage';
 import { SettingsPage } from './components/settings/SettingsPage';
 import { PlateConsultationPage } from './components/plate-consultation/PlateConsultationPage';
 import { MaintenancePage } from './components/maintenance/MaintenancePage';
+import { ConsultationHistoryPage } from './components/consultation-history/ConsultationHistoryPage';
 import { MobileMenu } from './components/ui/MobileMenu';
 
 export default function App() {
@@ -28,12 +28,12 @@ export default function App() {
         return <Dashboard />;
       case 'plate-consultation':
         return <PlateConsultationPage />;
+      case 'consultation-history':
+        return <ConsultationHistoryPage />;
       case 'maintenance':
         return <MaintenancePage />;
       case 'customers':
         return <CustomersPage />;
-      case 'conversations':
-        return <ConversationsPage />;
       case 'campaigns':
         return <CampaignsPage />;
       case 'reporting':
