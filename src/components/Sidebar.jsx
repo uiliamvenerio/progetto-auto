@@ -1,24 +1,17 @@
 import React from 'react';
-import { House, UsersThree, ChatDots, Megaphone, ChartPie, Car } from './Icons';
+import { House, UsersThree, ChatDots, Megaphone, ChartPie, Car, Wrench } from './Icons';
 import clsx from 'clsx';
 
-/**
- * Navigation menu items configuration
- * Each item defines an id, icon component, and display text
- */
 const menuItems = [
   { id: 'dashboard', icon: House, text: 'Home' },
   { id: 'plate-consultation', icon: Car, text: 'Consultar Placa' },
+  { id: 'maintenance', icon: Wrench, text: 'Manutenções' },
   { id: 'customers', icon: UsersThree, text: 'Customers' },
   { id: 'conversations', icon: ChatDots, text: 'Conversations' },
   { id: 'campaigns', icon: Megaphone, text: 'Campaigns' },
   { id: 'reporting', icon: ChartPie, text: 'Reporting' }
 ];
 
-/**
- * Quick access customer item component
- * Displays customer avatar, name, last seen status, and amount
- */
 const QuickAccessItem = ({ image, name, lastSeen, amount, onClick }) => (
   <button
     onClick={onClick}
@@ -40,10 +33,6 @@ const QuickAccessItem = ({ image, name, lastSeen, amount, onClick }) => (
   </button>
 );
 
-/**
- * Sidebar component that contains navigation menu and quick access items
- * Handles both desktop and mobile layouts
- */
 export default function Sidebar({ isOpen, onClose, currentPage, onMenuItemClick }) {
   return (
     <aside className={clsx(
@@ -51,7 +40,6 @@ export default function Sidebar({ isOpen, onClose, currentPage, onMenuItemClick 
       isOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
     )}>
       <div className="flex h-full flex-col">
-        {/* Mobile header */}
         <div className="flex items-center justify-between p-4 lg:hidden">
           <h2 className="text-lg font-semibold text-gray-900 dark:text-white">Menu</h2>
           <button
@@ -65,7 +53,6 @@ export default function Sidebar({ isOpen, onClose, currentPage, onMenuItemClick 
         </div>
         
         <div className="flex-1 overflow-y-auto">
-          {/* Navigation menu */}
           <nav className="flex flex-col gap-1 p-4">
             {menuItems.map((item) => (
               <button
@@ -84,7 +71,6 @@ export default function Sidebar({ isOpen, onClose, currentPage, onMenuItemClick 
             ))}
           </nav>
           
-          {/* Quick access section */}
           <div className="border-t border-skyblue dark:border-gray-800">
             <h3 className="text-gray-900 dark:text-white text-sm font-semibold px-4 py-3">
               Quick access

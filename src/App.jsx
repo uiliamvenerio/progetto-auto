@@ -10,38 +10,26 @@ import { ReportingPage } from './components/reporting/ReportingPage';
 import { ProfilePage } from './components/profile/ProfilePage';
 import { SettingsPage } from './components/settings/SettingsPage';
 import { PlateConsultationPage } from './components/plate-consultation/PlateConsultationPage';
+import { MaintenancePage } from './components/maintenance/MaintenancePage';
 import { MobileMenu } from './components/ui/MobileMenu';
 
-/**
- * Main application component that handles routing and layout.
- * Manages the sidebar state and current page navigation.
- */
 export default function App() {
-  // State for mobile sidebar visibility
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  
-  // Current active page/route
   const [currentPage, setCurrentPage] = useState('dashboard');
 
-  /**
-   * Handles navigation between pages and closes mobile sidebar
-   * @param {string} page - The page identifier to navigate to
-   */
   const handleMenuItemClick = (page) => {
     setCurrentPage(page);
     setIsSidebarOpen(false);
   };
 
-  /**
-   * Renders the appropriate page component based on current route
-   * @returns {React.ReactNode} The page component to render
-   */
   const renderPage = () => {
     switch (currentPage) {
       case 'dashboard':
         return <Dashboard />;
       case 'plate-consultation':
         return <PlateConsultationPage />;
+      case 'maintenance':
+        return <MaintenancePage />;
       case 'customers':
         return <CustomersPage />;
       case 'conversations':
