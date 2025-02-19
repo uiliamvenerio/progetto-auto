@@ -45,11 +45,11 @@ const consultationTypes = [
   }
 ];
 
-const mockApiResponse = {
+const mockVehicleData = {
   "status": "sucesso",
   "API Full": "https://doc.apifull.com.br",
   "dados": {
-    "placa": "ABC1234",
+    "placa": "placa",
     "chassi": "9BWAB45U4HP000710",
     "fabricante": "VW",
     "modelo": "NOVO GOL TL MBV",
@@ -80,11 +80,115 @@ const mockApiResponse = {
   }
 };
 
+const mockInfractionsData = {
+  "status": "sucesso",
+  "API Full": "https://doc.apifull.com.br",
+  "dados": {
+    "alerta": "",
+    "placa": "API-1234",
+    "quantidade_ocorrencias": "4",
+    "quantidade_ocorrencias_total": "4",
+    "registros": [
+      {
+        "numeroautoinfracao": "1K 1399028",
+        "datadainfracao": "06/05/2024",
+        "exigibilidade": "Sim",
+        "infracao": "7471",
+        "orgao": "126200",
+        "detalhe_cod_infracao": "7471 - TRANSITAR ACIMA DE 50% DA VELOCIDADE PERMITIDA",
+        "detalhe_hr_infracao": "12:48",
+        "detalhe_local_infracao": "SP 330 KM 281 METROS 000",
+        "detalhe_valor_infracao": "880,41"
+      },
+      {
+        "numeroautoinfracao": "1K 1400568",
+        "datadainfracao": "06/05/2024",
+        "exigibilidade": "Sim",
+        "infracao": "7455",
+        "orgao": "126200",
+        "detalhe_cod_infracao": "7455 - TRANSITAR EM ATE 20% ACIMA DA VELOCIDADE PERMITIDA",
+        "detalhe_hr_infracao": "12:31",
+        "detalhe_local_infracao": "SP 330 KM 253 METROS 000",
+        "detalhe_valor_infracao": "130,16"
+      },
+      {
+        "numeroautoinfracao": "1K 1433648",
+        "datadainfracao": "06/05/2024",
+        "exigibilidade": "Sim",
+        "infracao": "7463",
+        "orgao": "126200",
+        "detalhe_cod_infracao": "7463 - TRANSITAR ACIMA DE 20% E ATE 50% DA VELOCIDADE PERMITIDA",
+        "detalhe_hr_infracao": "15:50",
+        "detalhe_local_infracao": "SP 330 KM 405 METROS 000",
+        "detalhe_valor_infracao": "195,23"
+      },
+      {
+        "numeroautoinfracao": "AG04227XXX",
+        "datadainfracao": "12/08/2023",
+        "exigibilidade": "Sim",
+        "infracao": "5568",
+        "orgao": "253750",
+        "detalhe_cod_infracao": "5568 - ESTACIONAR/PARAR EM LOCAL/HORARIO PROIBIDOS PELA SINALIZACAO",
+        "detalhe_hr_infracao": "21:08",
+        "detalhe_local_infracao": "RUA SAO FRANCISCO DE PAULA N71",
+        "detalhe_valor_infracao": "195,23"
+      }
+    ]
+  }
+};
+
+const mockGravameData = {
+  "status": "sucesso",
+  "API Full": "https://doc.apifull.com.br",
+  "dados": {
+    "placa": "API-1234",
+    "ufplaca": "MG",
+    "anofabricacao": "2016",
+    "anomodelo": "2017",
+    "renavam": "123456789",
+    "documentoproprietarioatual": "0",
+    "nomefinanciado": "",
+    "numerocontrato": "",
+    "documentofinanceira": "NADA CONSTA",
+    "financeiranome": "NADA CONSTA",
+    "codigofinanceira": "NADA CONSTA",
+    "ufgravame": "NADA CONSTA",
+    "datagravame": "NADA CONSTA",
+    "datagravamevigencia": "",
+    "descricaostatus": "VEICULO SEM RESTRICOES ATIVAS NA BASE SNG",
+    "statusdoveiculo": "",
+    "chassi": "xxxxxxxxxxxxxxx"
+  }
+};
+
+const mockSinistrosData = {
+  "status": "sucesso",
+  "API Full": "https://doc.apifull.com.br",
+  "dados": {
+    "msg": "Não consta indício de sinistro para o veículo pesquisado",
+    "consta_indicio_sinistro": false,
+    "transf_titu_cnpj_seg": {
+      "produto": "Transferência de Titularidade para CNPJ de Seguradora",
+      "msg": "Em nossa base de dados, não foi localizado registro para o veículo pesquisado",
+      "resposta": []
+    },
+    "hist_ex_viatu_policial": {
+      "produto": "Histórico de Ex Viatura Policial",
+      "msg": "Em nossa base de dados, não foi localizado registro para o veículo pesquisado",
+      "resposta": []
+    }
+    // ... other fields omitted for brevity
+  }
+};
+
 export function PlateConsultationPage() {
   const [plate, setPlate] = useState('');
   const [selectedType, setSelectedType] = useState('gold');
   const [loading, setLoading] = useState(false);
   const [vehicleData, setVehicleData] = useState(null);
+  const [infractionsData, setInfractionsData] = useState(null);
+  const [gravameData, setGravameData] = useState(null);
+  const [sinistrosData, setSinistrosData] = useState(null);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -97,9 +201,19 @@ export function PlateConsultationPage() {
     setLoading(true);
     // Simulate API call
     setTimeout(() => {
-      const response = { ...mockApiResponse };
+      const response = { ...mockVehicleData };
       response.dados.placa = plate;
       setVehicleData(response);
+      
+      if (selectedType === 'gold' || selectedType === 'silver') {
+        setInfractionsData(mockInfractionsData);
+      }
+      
+      if (selectedType === 'gold') {
+        setGravameData(mockGravameData);
+        setSinistrosData(mockSinistrosData);
+      }
+      
       setLoading(false);
     }, 1500);
   };
@@ -111,7 +225,20 @@ export function PlateConsultationPage() {
   };
 
   if (vehicleData) {
-    return <VehicleDataPage data={vehicleData} onBack={() => setVehicleData(null)} />;
+    return (
+      <VehicleDataPage 
+        data={vehicleData}
+        infractions={selectedType !== 'bronze' ? infractionsData : null}
+        gravame={selectedType === 'gold' ? gravameData : null}
+        sinistros={selectedType === 'gold' ? sinistrosData : null}
+        onBack={() => {
+          setVehicleData(null);
+          setInfractionsData(null);
+          setGravameData(null);
+          setSinistrosData(null);
+        }}
+      />
+    );
   }
 
   return (
