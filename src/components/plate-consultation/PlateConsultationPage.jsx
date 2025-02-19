@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Card, CardHeader, CardContent } from '../ui/Card';
 import { Button } from '../ui/Button';
+import { VehicleDataPage } from './VehicleDataPage';
 import toast from 'react-hot-toast';
 import clsx from 'clsx';
 
@@ -44,10 +45,46 @@ const consultationTypes = [
   }
 ];
 
+const mockApiResponse = {
+  "status": "sucesso",
+  "API Full": "https://doc.apifull.com.br",
+  "dados": {
+    "placa": "ABC1234",
+    "chassi": "9BWAB45U4HP000710",
+    "fabricante": "VW",
+    "modelo": "NOVO GOL TL MBV",
+    "ano_fabricacao": 2016,
+    "ano_modelo": 2017,
+    "combustivel": "ALCOOL / GASOLINA",
+    "tipo_veiculo": "AUTOMOVEL",
+    "especie": "PASSAGEIRO",
+    "cor": "BRANCA",
+    "tipo_carroceria": "NAO APLICAVEL",
+    "nacionalidade": "NACIONAL",
+    "numero_motor": "CCRU81538",
+    "potencia": 104,
+    "carga": null,
+    "numero_carroceria": null,
+    "numero_caixa_cambio": null,
+    "numero_eixo_traseiro": null,
+    "numero_terceiro_eixo": null,
+    "quantidade_eixo": "2",
+    "cilindradas": 1598,
+    "capacidade_max_tracao": 185,
+    "peso_bruto_total": 145,
+    "quantidade_lugares": 5,
+    "tipo_montagem": 1,
+    "uf_jurisdicao": "MG",
+    "uf_faturado": "MG",
+    "cidade": "BELO HORIZONTE"
+  }
+};
+
 export function PlateConsultationPage() {
   const [plate, setPlate] = useState('');
   const [selectedType, setSelectedType] = useState('gold');
   const [loading, setLoading] = useState(false);
+  const [vehicleData, setVehicleData] = useState(null);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -60,7 +97,9 @@ export function PlateConsultationPage() {
     setLoading(true);
     // Simulate API call
     setTimeout(() => {
-      toast.success('Consulta realizada com sucesso!');
+      const response = { ...mockApiResponse };
+      response.dados.placa = plate;
+      setVehicleData(response);
       setLoading(false);
     }, 1500);
   };
@@ -70,6 +109,10 @@ export function PlateConsultationPage() {
     const cleaned = value.replace(/[^A-Za-z0-9]/g, '').toUpperCase();
     return cleaned.slice(0, 7);
   };
+
+  if (vehicleData) {
+    return <VehicleDataPage data={vehicleData} onBack={() => setVehicleData(null)} />;
+  }
 
   return (
     <main className="flex-1 min-w-0 overflow-auto">
@@ -124,7 +167,7 @@ export function PlateConsultationPage() {
                           name="consultationType"
                           checked={selectedType === type.id}
                           onChange={() => setSelectedType(type.id)}
-                          className="h-4 w-4 text-primary border-gray-300 focus:ring-primary"
+                          className="h-4 w-4 text-primary border-skyblue dark:border-gray-600 focus:ring-primary"
                         />
                         <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
                           {type.name}
