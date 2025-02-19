@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Card, CardHeader, CardContent } from '../ui/Card';
+import { Button } from '../ui/Button';
 import { format } from 'date-fns';
+import { MaintenanceModal } from './MaintenanceModal';
 
-const maintenanceHistory = [
+const initialMaintenanceHistory = [
   {
     id: 1,
     date: '2023-12-15',
@@ -33,6 +35,13 @@ const maintenanceHistory = [
 ];
 
 export function MaintenancePage() {
+  const [maintenanceHistory, setMaintenanceHistory] = useState(initialMaintenanceHistory);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleAddMaintenance = (newMaintenance) => {
+    setMaintenanceHistory([newMaintenance, ...maintenanceHistory]);
+  };
+
   return (
     <main className="flex-1 min-w-0 overflow-auto">
       <div className="max-w-[1440px] mx-auto animate-fade-in">
@@ -40,6 +49,9 @@ export function MaintenancePage() {
           <h1 className="text-gray-900 dark:text-white text-2xl md:text-3xl font-bold">
             Histórico de Manutenções
           </h1>
+          <Button onClick={() => setIsModalOpen(true)}>
+            Nova Manutenção
+          </Button>
         </div>
 
         <div className="p-4">
@@ -113,6 +125,12 @@ export function MaintenancePage() {
           </Card>
         </div>
       </div>
+
+      <MaintenanceModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onSubmit={handleAddMaintenance}
+      />
     </main>
   );
 }
