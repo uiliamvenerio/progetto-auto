@@ -6,6 +6,7 @@ import { House, UsersThree, Megaphone, ChartPie, Car, Wrench, ClipboardText } fr
 export function MobileMenu({ isOpen, onClose, currentPage, onNavigate }) {
   const menuItems = [
     { id: 'dashboard', label: 'Home', icon: House },
+    { id: 'vehicle-consultation', label: 'Consultar Veículos', icon: Car },
     { id: 'plate-consultation', label: 'Consultar Placa', icon: Car },
     { id: 'consultation-history', label: 'Histórico de Consultas', icon: ClipboardText },
     { id: 'maintenance', label: 'Manutenções', icon: Wrench },

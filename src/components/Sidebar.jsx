@@ -4,6 +4,7 @@ import clsx from 'clsx';
 
 const menuItems = [
   { id: 'dashboard', icon: House, text: 'Home' },
+  { id: 'vehicle-consultation', icon: Car, text: 'Consultar Veículos' },
   { id: 'plate-consultation', icon: Car, text: 'Consultar Placa' },
   { id: 'consultation-history', icon: ClipboardText, text: 'Histórico de Consultas' },
   { id: 'maintenance', icon: Wrench, text: 'Manutenções' },

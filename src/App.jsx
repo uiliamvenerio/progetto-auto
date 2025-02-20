@@ -11,6 +11,7 @@ import { SettingsPage } from './components/settings/SettingsPage';
 import { PlateConsultationPage } from './components/plate-consultation/PlateConsultationPage';
 import { MaintenancePage } from './components/maintenance/MaintenancePage';
 import { ConsultationHistoryPage } from './components/consultation-history/ConsultationHistoryPage';
+import { VehicleConsultationPage } from './components/vehicle-consultation/VehicleConsultationPage';
 import { MobileMenu } from './components/ui/MobileMenu';
 
 export default function App() {
@@ -26,6 +27,8 @@ export default function App() {
     switch (currentPage) {
       case 'dashboard':
         return <Dashboard />;
+      case 'vehicle-consultation':
+        return <VehicleConsultationPage />;
       case 'plate-consultation':
         return <PlateConsultationPage />;
       case 'consultation-history':
