@@ -1,10 +1,64 @@
 import React, { useState } from 'react';
 import { Card, CardHeader, CardContent } from '../ui/Card';
 import { Button } from '../ui/Button';
+import { VehicleDataPage } from './VehicleDataPage';
 import toast from 'react-hot-toast';
+
+const mockVehicleData = {
+  "MARCA": "FORD",
+  "MODELO": "FORD/FIESTA 1.6 FLEX",
+  "SUBMODELO": "FORD/FIESTA",
+  "VERSAO": "FLEX",
+  "ano": "2010",
+  "anoModelo": "2011",
+  "chassi": "*****7B8070520",
+  "cor": "Vermelha",
+  "placa": "IQW1792",
+  "placa_modelo_antigo": "IQW1792",
+  "placa_modelo_novo": "IQW1H92",
+  "placa_nova": "f",
+  "extra": {
+    "ano_fabricacao": "2010",
+    "ano_modelo": "2011",
+    "cilindradas": "1598",
+    "combustivel": "Alcool / Gasolina",
+    "cor_veiculo": {
+      "cor": "Vermelha"
+    },
+    "eixos": "2",
+    "motor": "QF9AB8070520",
+    "municipio": {
+      "municipio": "PORTO ALEGRE",
+      "uf": "RS"
+    },
+    "nacionalidade": "Nacional",
+    "peso_bruto_total": "151",
+    "potencia": "107",
+    "quantidade_passageiro": "5",
+    "restricao1": {
+      "restricao": "SEM RESTRICAO"
+    },
+    "restricao2": {
+      "restricao": "SEM RESTRICAO"
+    },
+    "restricao3": {
+      "restricao": "SEM RESTRICAO"
+    },
+    "restricao4": {
+      "restricao": "SEM RESTRICAO"
+    }
+  },
+  "municipio": "PORTO ALEGRE",
+  "uf": "RS",
+  "uf_placa": "RS",
+  "combustivel": "Alcool / Gasolina",
+  "potencia": "107",
+  "quantidade_passageiro": "5"
+};
 
 export function VehicleConsultationPage() {
   const [plate, setPlate] = useState('');
+  const [vehicleData, setVehicleData] = useState(null);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -14,7 +68,10 @@ export function VehicleConsultationPage() {
       return;
     }
 
-    toast.success('Consultando placa ' + plate);
+    // Simulate API call
+    setTimeout(() => {
+      setVehicleData(mockVehicleData);
+    }, 1000);
   };
 
   const formatPlate = (value) => {
@@ -22,6 +79,10 @@ export function VehicleConsultationPage() {
     const cleaned = value.replace(/[^A-Za-z0-9]/g, '').toUpperCase();
     return cleaned.slice(0, 7);
   };
+
+  if (vehicleData) {
+    return <VehicleDataPage data={vehicleData} onBack={() => setVehicleData(null)} />;
+  }
 
   return (
     <main className="flex-1 min-w-0 overflow-auto">
