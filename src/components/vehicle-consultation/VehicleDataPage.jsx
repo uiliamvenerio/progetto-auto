@@ -78,15 +78,21 @@ export function VehicleDataPage({ data, onBack }) {
           {/* Gold Consultation Information */}
           <Card className="max-w-5xl mx-auto">
             <div className="p-6 space-y-4">
-              <div className="flex items-center gap-3">
-                <div className="p-2 rounded-lg bg-yellow-100 dark:bg-yellow-900/30">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 256 256" className="text-yellow-600 dark:text-yellow-400">
-                    <path d="M243.84,76.19a12.08,12.08,0,0,0-13.34-1.7l-50.21,25L138.37,4.87a12,12,0,0,0-20.74,0L75.71,99.52l-50.21-25a12,12,0,0,0-17.37,13l27.23,157A12,12,0,0,0,47.19,252H208.81a12,12,0,0,0,11.83-7.51l27.23-157A12,12,0,0,0,243.84,76.19ZM208.81,228H47.19L22.86,89l46.85,23.37L100,57.51l35.09,87.72a12,12,0,0,0,22.13-9.06L128,48.39l38.29,87.78L233.14,89Z"/>
-                  </svg>
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <div className="p-2 rounded-lg bg-yellow-100 dark:bg-yellow-900/30">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 256 256" className="text-yellow-600 dark:text-yellow-400">
+                      <path d="M243.84,76.19a12.08,12.08,0,0,0-13.34-1.7l-50.21,25L138.37,4.87a12,12,0,0,0-20.74,0L75.71,99.52l-50.21-25a12,12,0,0,0-17.37,13l27.23,157A12,12,0,0,0,47.19,252H208.81a12,12,0,0,0,11.83-7.51l27.23-157A12,12,0,0,0,243.84,76.19ZM208.81,228H47.19L22.86,89l46.85,23.37L100,57.51l35.09,87.72a12,12,0,0,0,22.13-9.06L128,48.39l38.29,87.78L233.14,89Z"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <h2 className="text-xl font-semibold text-gray-900 dark:text-white">Consulta Gold</h2>
+                    <p className="text-primary font-medium">+25 Informações sobre o seu veículo</p>
+                  </div>
                 </div>
-                <div>
-                  <h2 className="text-xl font-semibold text-gray-900 dark:text-white">Consulta Gold</h2>
-                  <p className="text-primary font-medium">+25 Informações sobre o seu veículo</p>
+                <div className="text-right">
+                  <p className="text-sm text-gray-500 dark:text-gray-400 line-through">De R$59,90</p>
+                  <p className="text-2xl font-bold text-primary">por R$49,90</p>
                 </div>
               </div>
 
